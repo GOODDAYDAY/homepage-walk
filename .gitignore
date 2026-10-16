@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# 产物和截图不进仓库（二进制会撑爆历史，而且历史里已经清过一次）
+out/
+assets/screens/

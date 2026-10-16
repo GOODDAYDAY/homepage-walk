@@ -7,10 +7,10 @@
     "lang": "主语言，决定房子配色（见文件末尾 palette）",
     "stars": "房高 = 30 + round(√stars × 5)，HUD 上显示 ★N",
     "zh": "HUD 第二行中文，宽度上限 268 世界像素，约 22 个汉字",
-    "emblem": "自绘徽章图案名，见 render.py 的 emblem()，27 种可选",
-    "shot": "可选。有值就用 assets/screens/<shot> 这张真实截图当屏幕，没有就画徽章",
+    "emblem": "自绘徽章图案名，见 render.py 的 emblem()，28 种可选",
     "upstream": "true = 给别人的开源项目提的贡献，房高按 commits 算，HUD 显示 merged Nc",
-    "commits": "upstream 站台专用：你在那边提交了多少次"
+    "commits": "upstream 站台专用：你在那边提交了多少次",
+    "shot_source": "可选。想用真实截图时，从这一站的仓库里取这张图，裁成 5:3 放进 assets/screens/，再加 shot 字段"
   },
   "stations": [
     {
@@ -33,7 +33,8 @@
       "lang": "Python",
       "stars": 1,
       "zh": "和朋友一起写的游戏通信工具，一切从这里开始",
-      "shot": "practice1.png"
+      "emblem": "nodes",
+      "shot_source": "practice1/picture/architecture.png"
     },
     {
       "name": "goody-utils",
@@ -114,7 +115,8 @@
       "lang": "Python",
       "stars": 12,
       "zh": "AI 生成像素游戏素材，12 颗星是全街最亮的招牌",
-      "shot": "frameronin-mcp.png"
+      "emblem": "sparkle",
+      "shot_source": "FrameRonin-MCP/docs/assets/demo-full-pipeline.png"
     },
     {
       "name": "ChromePilot",
@@ -125,7 +127,8 @@
       "lang": "JavaScript",
       "stars": 1,
       "zh": "用大白话操控浏览器的 Chrome 扩展",
-      "shot": "chromepilot.png"
+      "emblem": "robot",
+      "shot_source": "ChromePilot/docs/images/1. drink water 10 times.gif"
     },
     {
       "name": "my-harness-desktop",

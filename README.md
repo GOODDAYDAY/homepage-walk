@@ -19,15 +19,16 @@
 homepage-walk/
 ├── projects.json            ← 唯一的配置入口：14 个站台的全部内容
 ├── render.py                ← 渲染器（唯一的程序，913 行）
-├── assets/screens/          ← 真实截图（3 张，其余站台走自绘徽章）
-├── out/
-│   ├── pixelwalk.gif        ← 正片：960×342 / 180 帧 / 15 秒 / 2.15 MiB
-│   └── pixelwalk-poster.png ← 封面静帧 1280×456
 ├── .dsh/skills/             ← 给 AI 用的操作手册，随仓库走
 │   ├── homepage-walk/           「怎么改这个项目」
 │   └── homepage-walk-guide/     「从零搭一条 / 抓项目 / 风格怎么分」
-└── README.md
+├── README.md
+├── assets/screens/          ← 想用真实截图就放这里（.gitignore 忽略，不进仓库）
+└── out/                     ← 产物（.gitignore 忽略，跑一次就有）
 ```
+
+**仓库里只有文本**：代码、配置、skills。图片一律不进版本控制——
+二进制会撑爆 git 历史，而且这仓库的历史已经为此清过一次。
 
 ## 跑一遍
 
@@ -100,7 +101,7 @@ cp -r .dsh/skills/* ~/.dsh/skills/     # 让 AI 认识这个项目
 $PY render.py                          # 验证能跑
 ```
 
-仓库里带了 `out/` 的成品，clone 下来就能直接看结果对不对。
+clone 下来跑一次 `render.py`，产物会出现在 `out/`。
 
 ### 想从零重做一条（换账号 / 帮别人做）
 
@@ -154,13 +155,16 @@ curl -sL "https://github.com/GOODDAYDAY" | grep -oE 'src="[^"]*pixelwalk[^"]*"'
 
 ## 版本历史
 
-`git log` 第一条是**精简前的基线**：`4e86147` —— 32 站 / 280 帧 / 23 秒 / 3.73 MiB 的全量版本，
+`git log` 第一条是**精简前的基线**：`a06a98e` —— 32 站 / 280 帧 / 23 秒的全量版本，
 里面还留着当时那套自动抓图管线（`fetch_screens.py`）和一份 issue 草稿。
 
 ```bash
-git show 4e86147:projects.json                   # 看 32 站配置
-git show 4e86147:work/attic/upstream-issue.md    # 找回那份草稿
+git show a06a98e:projects.json                   # 看 32 站配置
+git show a06a98e:work/attic/upstream-issue.md    # 找回那份草稿
 ```
+
+> **历史清过一次**：所有 `.png` / `.gif` 已从全部提交里移除（`git filter-repo --invert-paths`）。
+> 那 3 张截图在 `projects.json` 里留了 `shot_source` 字段记着出处，想用随时能重新裁。
 
 精简砍掉的：18 个站台、`fetch_screens.py` 整条抓图管线、`work/` 目录、`fork` 分支（保留 `upstream`）。
 理由写在 `homepage-walk` skill 的 §1 末尾——**别把它加回来**。
@@ -173,6 +177,11 @@ git show 4e86147:work/attic/upstream-issue.md    # 找回那份草稿
 账号上那个 `PixelWalk` fork 是它的副本，跟本项目无关。
 
 ## 以后可以做的
+
+**重新加回真实截图**：3 个站台的 `shot_source` 记着原来的出处
+（`practice1/picture/architecture.png`、`ChromePilot/docs/images/1. drink water 10 times.gif`、
+`FrameRonin-MCP/docs/assets/demo-full-pipeline.png`）。取回来裁成 5:3 丢进 `assets/screens/`，
+那一站加回 `shot` 字段即可。
 
 **SMIL 动画 SVG**：同一套世界模型换成 SVG —— 静态世界一个 `<g>`、镜头一个 `animateTransform`、
 小人一个 `animateTransform` + 4 帧 `<set>`、屏幕点亮用 `opacity`、素材 base64 内嵌。
