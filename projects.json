@@ -1,0 +1,531 @@
+{
+  "_comment": "Pixel Walk 的完整项目清单：自己的 30 个公开仓库 + fork 里确实提交过的 7 个。改完重跑 render.py 即可。",
+  "owner": "GOODDAYDAY",
+  "_fields": {
+    "name": "站台上显示的名字",
+    "repos": "对应的 GitHub 仓库（多个 = 合并成一站）",
+    "year": "显示在年份刻度上的年份",
+    "lang": "主语言，决定房子配色",
+    "stars": "star 数，决定房子高度",
+    "fork": "true = fork 来的仓库，房子矮一点，HUD 里显示 commit 数而不是 star",
+    "commits": "fork 仓库里本人提交数",
+    "en": "英文备注（预留）",
+    "zh": "HUD 第二行中文备注，宽度别超过约 268 像素（约 22 个汉字）",
+    "screen": "{source: readme, url: ...} 用仓库里的图；{source: generated, emblem: ...} 用自绘徽章",
+    "upstream": "true = 给别人的开源项目提的贡献，房高按 commits 算，HUD 显示 merged Nc"
+  },
+  "stations": [
+    {
+      "name": "saasi-experiment",
+      "repos": [
+        "saasi-experiment"
+      ],
+      "year": 2018,
+      "lang": "Python",
+      "stars": 0,
+      "en": "microservice course experiment",
+      "zh": "本科的微服务课程实验，第一次动手拆服务",
+      "screen": {
+        "source": "generated",
+        "emblem": "microservice"
+      }
+    },
+    {
+      "name": "SmartVM",
+      "repos": [
+        "saasi-experiment-2"
+      ],
+      "year": 2018,
+      "lang": "Python",
+      "stars": 0,
+      "fork": true,
+      "commits": 1,
+      "en": "SmartVM prototype experiments",
+      "zh": "SmartVM 原型实验，在上一版基础上接着往下做",
+      "screen": {
+        "source": "generated",
+        "emblem": "graph"
+      }
+    },
+    {
+      "name": "practice1",
+      "repos": [
+        "practice1"
+      ],
+      "year": 2019,
+      "lang": "Python",
+      "stars": 1,
+      "en": "a websocket game server, written with friends",
+      "zh": "和朋友一起写的游戏通信工具，一切从这里开始",
+      "screen": {
+        "source": "readme",
+        "url": "picture/architecture.png"
+      }
+    },
+    {
+      "name": "goody-utils",
+      "repos": [
+        "goody-utils"
+      ],
+      "year": 2022,
+      "lang": "Java",
+      "stars": 1,
+      "en": "a personal java utility belt",
+      "zh": "自用 Java 工具库，零零碎碎攒起来的那点家当",
+      "screen": {
+        "source": "generated",
+        "emblem": "toolbox"
+      }
+    },
+    {
+      "name": "ratel",
+      "repos": [
+        "ainilili/ratel"
+      ],
+      "year": 2022,
+      "lang": "Java",
+      "stars": 0,
+      "commits": 2,
+      "en": "2 commits into the upstream command-line dou dizhu",
+      "zh": "命令行斗地主，给上游补了两笔",
+      "screen": {
+        "source": "generated",
+        "emblem": "merge"
+      },
+      "upstream": true
+    },
+    {
+      "name": "GOODDAYDAY.github.io",
+      "repos": [
+        "GOODDAYDAY.github.io"
+      ],
+      "year": 2025,
+      "lang": "Mermaid",
+      "stars": 1,
+      "en": "personal blog",
+      "zh": "个人博客，画 Mermaid 图比写字还多",
+      "screen": {
+        "source": "generated",
+        "emblem": "page"
+      }
+    },
+    {
+      "name": "Tic-Tac-Toe RL",
+      "repos": [
+        "Tic_Tac_Toe-AI_Reinforcement_Learning_Training--Developed_by_DeepSeek-R1"
+      ],
+      "year": 2025,
+      "lang": "Python",
+      "stars": 0,
+      "en": "tic-tac-toe with reinforcement learning",
+      "zh": "井字棋强化学习，代码全由 DeepSeek-R1 写",
+      "screen": {
+        "source": "generated",
+        "emblem": "tictactoe"
+      }
+    },
+    {
+      "name": "basic-check",
+      "repos": [
+        "basic-check-java-8",
+        "basic-check-java-17"
+      ],
+      "year": 2025,
+      "lang": "Java",
+      "stars": 0,
+      "en": "annotation validation via AOP, java 8 and 17",
+      "zh": "注解式参数校验框架，AOP 一把梭，JDK 8/17",
+      "screen": {
+        "source": "generated",
+        "emblem": "shield"
+      }
+    },
+    {
+      "name": "value-checker",
+      "repos": [
+        "value-checker-java-8",
+        "value-checker-java-17"
+      ],
+      "year": 2025,
+      "lang": "Java",
+      "stars": 0,
+      "en": "another AOP validation framework",
+      "zh": "又一个校验框架，这版用 thread-local 存状态",
+      "screen": {
+        "source": "generated",
+        "emblem": "clipboard"
+      }
+    },
+    {
+      "name": "gomoku",
+      "repos": [
+        "gomoku-frontend",
+        "gomuku-backend"
+      ],
+      "year": 2025,
+      "lang": "JavaScript",
+      "stars": 0,
+      "en": "full-stack gomoku: js front, java back",
+      "zh": "前后端分离的五子棋，前端 JS 后端 Java",
+      "screen": {
+        "source": "generated",
+        "emblem": "board"
+      }
+    },
+    {
+      "name": "mybatis-gen-plugins",
+      "repos": [
+        "mybatis-generator-custome-plugins"
+      ],
+      "year": 2025,
+      "lang": "Java",
+      "stars": 0,
+      "en": "custom plugins for mybatis generator",
+      "zh": "给 MyBatis Generator 写的一整套自定义插件",
+      "screen": {
+        "source": "generated",
+        "emblem": "db"
+      }
+    },
+    {
+      "name": "xiaozhi-esp32-server",
+      "repos": [
+        "xinnan-tech/xiaozhi-esp32-server"
+      ],
+      "year": 2025,
+      "lang": "Java",
+      "stars": 0,
+      "commits": 14,
+      "en": "14 commits merged into the upstream xiaozhi server",
+      "zh": "给小智 ESP32 后端提了 14 个提交，PR 已合并",
+      "screen": {
+        "source": "generated",
+        "emblem": "merge"
+      },
+      "upstream": true
+    },
+    {
+      "name": "AStock-MCP",
+      "repos": [
+        "AStock-MCP"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 2,
+      "en": "A-share market data for AI assistants",
+      "zh": "给 AI 助手用的 A 股全栈数据服务，17+ 工具",
+      "screen": {
+        "source": "generated",
+        "emblem": "chart"
+      }
+    },
+    {
+      "name": "Afterglow",
+      "repos": [
+        "Afterglow"
+      ],
+      "year": 2026,
+      "lang": "TypeScript",
+      "stars": 0,
+      "en": "any video becomes a shadowing workstation",
+      "zh": "把任意视频变成跟读训练台，AI 自动切分句子",
+      "screen": {
+        "source": "generated",
+        "emblem": "play"
+      }
+    },
+    {
+      "name": "CatchWord",
+      "repos": [
+        "CatchWord"
+      ],
+      "year": 2026,
+      "lang": "Rust",
+      "stars": 0,
+      "en": "seamless AI vocabulary builder",
+      "zh": "划词翻译加生词本，Rust 写的第一个正经项目",
+      "screen": {
+        "source": "generated",
+        "emblem": "book"
+      }
+    },
+    {
+      "name": "ChromePilot",
+      "repos": [
+        "ChromePilot"
+      ],
+      "year": 2026,
+      "lang": "JavaScript",
+      "stars": 1,
+      "en": "drive chrome with plain english",
+      "zh": "用大白话操控浏览器的 Chrome 扩展",
+      "screen": {
+        "source": "readme",
+        "url": "docs/images/1. drink water 10 times.gif"
+      }
+    },
+    {
+      "name": "FinancialAnalysis",
+      "repos": [
+        "FinancialAnalysis"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 1,
+      "en": "11 agents argue about the market",
+      "zh": "11 个 Agent 开会吵架，给你一份能解释的结论",
+      "screen": {
+        "source": "generated",
+        "emblem": "bars"
+      }
+    },
+    {
+      "name": "FrameRonin-MCP",
+      "repos": [
+        "FrameRonin-MCP"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 12,
+      "en": "pixel-art game assets, generated over MCP",
+      "zh": "AI 生成像素游戏素材，12 颗星是全街最亮的招牌",
+      "screen": {
+        "source": "readme",
+        "url": "docs/assets/demo-full-pipeline.png"
+      }
+    },
+    {
+      "name": "GOODDAYDAY",
+      "repos": [
+        "GOODDAYDAY"
+      ],
+      "year": 2026,
+      "lang": "Mermaid",
+      "stars": 0,
+      "en": "the profile page you are looking at",
+      "zh": "这个主页本身，你现在正看着它",
+      "screen": {
+        "source": "generated",
+        "emblem": "avatar"
+      }
+    },
+    {
+      "name": "Harness-Everything",
+      "repos": [
+        "Harness-Everything"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 1,
+      "en": "provider-agnostic AI coding harness",
+      "zh": "随便接哪家模型，让它自己改自己的代码",
+      "screen": {
+        "source": "generated",
+        "emblem": "gear"
+      }
+    },
+    {
+      "name": "Masquerade",
+      "repos": [
+        "Masquerade"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 0,
+      "en": "AI agents play social deduction games",
+      "zh": "AI 玩狼人杀和谁是卧底，打完还能回放整局",
+      "screen": {
+        "source": "generated",
+        "emblem": "mask"
+      }
+    },
+    {
+      "name": "Synapulse",
+      "repos": [
+        "Synapulse"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 1,
+      "en": "voice-driven ambient assistant",
+      "zh": "语音驱动的桌面助手，会自己记事然后到点提醒你",
+      "screen": {
+        "source": "generated",
+        "emblem": "pulse"
+      }
+    },
+    {
+      "name": "TasteBud",
+      "repos": [
+        "TasteBud"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 0,
+      "en": "an AI curator for your taste profile",
+      "zh": "按你的口味自动筛内容的 AI 策展人",
+      "screen": {
+        "source": "generated",
+        "emblem": "sparkle"
+      }
+    },
+    {
+      "name": "agent-orchestra",
+      "repos": [
+        "agent-orchestra"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 0,
+      "en": "a TUI conducting a team of CLI agents",
+      "zh": "本地 TUI，指挥一队 Claude Code 分工干活",
+      "screen": {
+        "source": "generated",
+        "emblem": "nodes"
+      }
+    },
+    {
+      "name": "dsh-pocket",
+      "repos": [
+        "shaobeichen/dsh-pocket"
+      ],
+      "year": 2026,
+      "lang": "JavaScript",
+      "stars": 0,
+      "commits": 4,
+      "en": "4 commits into the upstream dsh-pocket",
+      "zh": "DeepSeek Harness 装进口袋，4 个提交进上游",
+      "screen": {
+        "source": "generated",
+        "emblem": "merge"
+      },
+      "upstream": true
+    },
+    {
+      "name": "langgraph",
+      "repos": [
+        "langgraph"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 0,
+      "fork": true,
+      "commits": 1,
+      "en": "graph-based language agents",
+      "zh": "图式 Agent 框架，顺手在人家仓库里提了一笔",
+      "screen": {
+        "source": "generated",
+        "emblem": "graph"
+      }
+    },
+    {
+      "name": "llmapp05",
+      "repos": [
+        "llmapp05"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 0,
+      "fork": true,
+      "commits": 3,
+      "en": "llm app coursework, round five",
+      "zh": "LLM 应用课的第五次作业",
+      "screen": {
+        "source": "generated",
+        "emblem": "microservice"
+      }
+    },
+    {
+      "name": "my-harness-desktop",
+      "repos": [
+        "my-harness-desktop"
+      ],
+      "year": 2026,
+      "lang": "TypeScript",
+      "stars": 1,
+      "en": "multi-kernel AI coding agent desktop shell",
+      "zh": "AI coding agent 桌面壳：薄壳 + 槽位 + 插件",
+      "screen": {
+        "source": "generated",
+        "emblem": "window"
+      }
+    },
+    {
+      "name": "my-potion-craft",
+      "repos": [
+        "my-potion-craft"
+      ],
+      "year": 2026,
+      "lang": "C#",
+      "stars": 0,
+      "en": "potion craft mod notes and workbench",
+      "zh": "Potion Craft 的 mod 说明和自己的小工作台",
+      "screen": {
+        "source": "generated",
+        "emblem": "potion"
+      }
+    },
+    {
+      "name": "my-skills",
+      "repos": [
+        "my-skills"
+      ],
+      "year": 2026,
+      "lang": "Shell",
+      "stars": 0,
+      "en": "skills and personas, shipped as a submodule",
+      "zh": "技能和人格定义做成 submodule，随处可挂",
+      "screen": {
+        "source": "generated",
+        "emblem": "prompt"
+      }
+    },
+    {
+      "name": "nanobot",
+      "repos": [
+        "nanobot"
+      ],
+      "year": 2026,
+      "lang": "Python",
+      "stars": 0,
+      "fork": true,
+      "commits": 1,
+      "en": "the ultra-lightweight openclaw",
+      "zh": "超轻量 OpenClaw，跟着改了两处",
+      "screen": {
+        "source": "generated",
+        "emblem": "robot"
+      }
+    },
+    {
+      "name": "pi plugins",
+      "repos": [
+        "pi-multi-agent",
+        "pi-orchestrator",
+        "pi-toolbox"
+      ],
+      "year": 2026,
+      "lang": "TypeScript",
+      "stars": 2,
+      "en": "orchestrator, sub-agents and toolbox for pi",
+      "zh": "给 pi 写的编排器、子代理和工具箱，一套组合拳",
+      "screen": {
+        "source": "generated",
+        "emblem": "plug"
+      }
+    }
+  ],
+  "palette": {
+    "_comment": "语言配色，参考 GitHub linguist，稍微调暗以适配像素风",
+    "Python": "#3572A5",
+    "Java": "#B07219",
+    "JavaScript": "#F1E05A",
+    "TypeScript": "#3178C6",
+    "C#": "#178600",
+    "Rust": "#DEA584",
+    "Shell": "#89E051",
+    "Mermaid": "#FF3670",
+    "HTML": "#E34C26",
+    "Go": "#00ADD8"
+  }
+}
