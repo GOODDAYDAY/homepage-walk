@@ -62,7 +62,7 @@ $PY render.py --poster 0.52 --scale 4 --title   # 出封面
 
 ### 自绘徽章
 
-27 种现成图案（`render.py` 的 `emblem()`）：
+28 种现成图案（`render.py` 的 `emblem()`）：
 
 ```
 avatar bars board book cards chart chip clipboard db gear graph mask merge microservice
