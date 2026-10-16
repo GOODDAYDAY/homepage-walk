@@ -660,7 +660,6 @@ def draw_house(img: Image.Image, st: dict, x: int, t: float, lit: float) -> None
     d = ImageDraw.Draw(img)
     d.rectangle([left, top, left + HOUSE_W - 1, top + h - 1], outline=edge)
     # 屋檐
-    contrib = st.get("upstream") or st.get("fork")
     roof_top = MERGE if st.get("upstream") else shade(col, 1.35)
     d.rectangle([left - 2, top - 3, left + HOUSE_W + 1, top - 1], fill=col)
     d.rectangle([left - 2, top - 3, left + HOUSE_W + 1, top - 3], fill=roof_top)
@@ -671,7 +670,7 @@ def draw_house(img: Image.Image, st: dict, x: int, t: float, lit: float) -> None
             d.rectangle([mx - i, top - 5 - i, mx + i, top - 5 - i], fill=MERGE)
         d.rectangle([mx, top - 12, mx, top - 6], fill=MERGE)
     # 高 star 的房子插一面小旗
-    if not st.get("fork") and not st.get("upstream") and st["stars"] >= 2:
+    if not st.get("upstream") and st["stars"] >= 2:
         fx = left + HOUSE_W - 6
         d.line([fx, top - 3, fx, top - 12], fill=shade(col, 0.9))
         d.polygon([fx, top - 12, fx + 8, top - 9, fx, top - 6], fill=shade(col, 1.4))
@@ -727,9 +726,7 @@ def draw_hud(img: Image.Image, st: dict, idx: int, n: int) -> None:
     d.line([0, RAIL_Y + 5, W - 1, RAIL_Y + 5], fill=shade(HUD_BG, 2.2))
     if st is None:
         return
-    if st.get("fork"):
-        meta = f"{st['year']} · {st['lang']} · fork {st.get('commits', 1)}c"
-    elif st.get("upstream"):
+    if st.get("upstream"):
         meta = f"{st['year']} · {st['lang']} · merged {st.get('commits', 1)}c"
     else:
         meta = f"{st['year']} · {st['lang']} · ★{st['stars']}"
@@ -747,27 +744,25 @@ def draw_hud(img: Image.Image, st: dict, idx: int, n: int) -> None:
 def load(cfg: dict) -> list[dict]:
     stations = []
     for s in cfg["stations"]:
-        slug = "".join(c if c.isalnum() or c in "-_" else "-" for c in s["name"]).strip("-").lower()
-        shot = ROOT / "work" / "screens" / f"{slug}.png"
-        col = LANG_RGB.get(s["lang"], (120, 120, 128))
         s = dict(s)
-        s["slug"] = slug
+        col = LANG_RGB.get(s["lang"], (120, 120, 128))
         s["rgb"] = col
         s["rgb_hi"] = tuple(min(255, round(v * 1.35 + 40)) for v in col)
         s["stars"] = int(s["stars"])
-        if s.get("fork"):
-            s["house_h"] = 28 + round(math.sqrt(max(1, int(s.get("commits", 1)))) * 2.6)
-        elif s.get("upstream"):
+        if s.get("upstream"):
+            # 给别人的项目做的贡献：房高按你在那边提交多少算，屋顶画合并箭头
             s["house_h"] = 32 + round(math.sqrt(max(1, int(s.get("commits", 1)))) * 2.6)
         else:
             s["house_h"] = 30 + round(math.sqrt(s["stars"]) * 5)
-        s["shot_path"] = shot if shot.exists() else None
-        s["emblem"] = s["screen"].get("emblem") or default_emblem(s)
+        shot = (ROOT / "assets" / "screens" / s["shot"]) if s.get("shot") else None
+        s["shot_path"] = shot if shot and shot.exists() else None
+        s["emblem"] = s.get("emblem") or default_emblem(s)
         stations.append(s)
     return stations
 
 
 def default_emblem(s: dict) -> str:
+    """配置里没写 emblem 时的兜底映射"""
     return {
         "goody-utils": "toolbox",
         "basic-check": "shield",
