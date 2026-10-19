@@ -6,7 +6,7 @@
     "year": "年份石牌 + 底部刻度轨",
     "lang": "主语言，决定房子配色（见文件末尾 palette）",
     "stars": "房高 = 30 + round(√stars × 5)，HUD 上显示 ★N",
-    "zh": "HUD 第二行中文，宽度上限 268 世界像素，约 22 个汉字",
+    "zh": "HUD 第二行中文，宽度上限 274 世界像素，约 22 个汉字",
     "emblem": "自绘徽章图案名，见 render.py 的 emblem()，28 种可选",
     "upstream": "true = 给别人的开源项目提的贡献，房高按 commits 算，HUD 显示 merged Nc",
     "commits": "upstream 站台专用：你在那边提交了多少次",

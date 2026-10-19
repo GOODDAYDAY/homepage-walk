@@ -51,7 +51,7 @@ python3 render.py
 常用命令：
 
 ```bash
-$PY render.py                                   # 出正片（15 秒）
+$PY render.py                                   # 出正片（约 4 秒）
 $PY render.py --preview 0.45                    # 只拍一张静帧，调画面用这个，秒出
 $PY render.py --poster 0.52 --scale 4 --title   # 出封面
 ```
@@ -228,5 +228,5 @@ git show a06a98e:work/attic/upstream-issue.md    # 找回那份草稿
 
 **SMIL 动画 SVG**：同一套世界模型换成 SVG —— 静态世界一个 `<g>`、镜头一个 `animateTransform`、
 小人一个 `animateTransform` + 4 帧 `<set>`、屏幕点亮用 `opacity`、素材 base64 内嵌。
-预计 **50–80 KB、任意缩放都清晰、GitHub camo 直接播**，比 2.15 MiB 的 GIF 强得多。
+预计 **50–80 KB、任意缩放都清晰、GitHub camo 直接播**，比 1.97 MiB 的 GIF 强得多。
 缺点是要重写渲染层。想做的信号：**你开始嫌 GIF 糊或者嫌 2 MB 大**。

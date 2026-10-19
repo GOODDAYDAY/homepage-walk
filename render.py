@@ -877,7 +877,9 @@ def frame_at(stations: list[dict], world_w: int, head_x: float, tick: int) -> Im
                                 fill=shade(GROUND_MID, 0.6))
     draw_walker(img, round(wx), SCENE_BOTTOM, tick)
     near_i = min(range(len(stations)), key=lambda i: abs(stations[i]["x"] - head_x))
-    near = stations[near_i] if abs(stations[near_i]["x"] - head_x) <= 60 else None
+    # 永远指向最近的一站 —— 以前超出 60px 就置 None，导致首尾各约 2 帧 HUD 空白。
+    # 站距 60，两站之间到最近站最多 30px，所以"最近站"在整个行程里都是合理的。
+    near = stations[near_i]
     draw_rail(img, stations, cam_x, head_x)
     draw_hud(img, near, near_i if near else 0, len(stations))
     return img
@@ -943,12 +945,16 @@ def main() -> int:
     # 省不出体积，别白费劲；要更小只能压画布或减帧数。
     pframes = [f.quantize(palette=pal_img, dither=Image.NONE)
                 .resize((W * args.scale, H * args.scale), Image.NEAREST) for f in frames]
+    # GIF 的帧延迟按【厘秒】存，传 83ms 会被取整成 80ms。
+    # 所以先自己取整到厘秒，再按真实值打印，别报一个假的 15.0s。
+    delay_cs = max(2, round(100 / args.fps))
+    delay_ms = delay_cs * 10
     gif = out / "pixelwalk.gif"
     pframes[0].save(gif, save_all=True, append_images=pframes[1:],
-                    duration=round(1000 / args.fps), loop=0, optimize=True)
+                    duration=delay_ms, loop=0, optimize=True)
     mb = gif.stat().st_size / 1024 / 1024
-    print(f"{gif}  {len(pframes)} 帧  {W*args.scale}x{H*args.scale}  {args.colors}色  {args.fps}fps  "
-          f"{len(pframes)/args.fps:.1f}s  {mb:.2f} MiB")
+    print(f"{gif}  {len(pframes)} 帧  {W*args.scale}x{H*args.scale}  {args.colors}色  "
+          f"{1000/delay_ms:.1f}fps  {len(pframes)*delay_ms/1000:.1f}s  {mb:.2f} MiB")
     return 0
 
 

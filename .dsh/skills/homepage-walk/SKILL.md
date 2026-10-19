@@ -17,7 +17,7 @@ whenToUse: 用户提到 homepage-walk / 像素漫步 / 主页那张项目街的�
 | 主页仓库本地克隆 | `/Users/goodyhao/toy/contriboom-out/profile-repo` |
 | 解释器 | `/Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3`（下称 `$PY`） |
 | 依赖 | 只有 **Pillow + numpy**。**本机的 `/usr/bin/python3` 没装 Pillow**，所以一律用 `$PY`；换机器先 `pip install -r requirements.txt` |
-| 当前产物 | 960×342，14 站，180 帧 / 12fps / 15 秒，2.15 MiB |
+| 当前产物 | 960×342，14 站，180 帧 / 12.5fps / **14.4 秒**，1.97 MiB |
 
 **设计原则：全程离线。** 不联网、不调 GitHub API、不装依赖，同样输入永远出同样结果。
 如果哪次改动需要联网才能跑，那多半是走错路了。
@@ -26,7 +26,7 @@ whenToUse: 用户提到 homepage-walk / 像素漫步 / 主页那张项目街的�
 
 | 改了什么 | 命令 |
 |---|---|
-| 文案 / 排序 / 站台增删 / 换 `shot` | `$PY render.py` （15 秒） |
+| 文案 / 排序 / 站台增删 / 换 `shot` | `$PY render.py` （约 4 秒） |
 | 调画面（布局、颜色、房子、小人、HUD） | `$PY render.py --preview 0.45` —— **秒出静帧，调画面一律用这个** |
 | 出封面 | `$PY render.py --poster 0.52 --scale 4 --title` |
 | 发布到主页 | 见 §6 |
@@ -45,7 +45,7 @@ assets/screens/ ┘                  out/pixelwalk-poster.png
 homepage-walk/
 ├── projects.json      # 唯一配置入口：14 个站台
 ├── render.py          # 渲染器：320×114 世界像素绘制，最后最近邻放大 3 倍
-├── assets/screens/    # 真实截图（只有 3 张，其余站台走自绘徽章）
+├── assets/screens/    # 真实截图（当前为空；配置里 3 个 shot_source 记着出处）
 └── out/
 ```
 
@@ -147,11 +147,14 @@ nodes page phone play plug potion prompt pulse robot shield sparkle tictactoe to
 
 | 配置 | 体积 |
 |---|---|
-| `--scale 3` (960×342) `--frames 180` | **2.15 MiB** ← 当前 |
-| `--scale 3 --frames 240` | 2.8 MiB |
-| `--scale 2` (640×228) `--frames 180` | 1.4 MiB |
+| `--scale 3` (960×342) `--frames 180` | **1.97 MiB** ← 当前 |
+| `--scale 3 --frames 240` | 2.6 MiB |
+| `--scale 2` (640×228) `--frames 180` | 1.2 MiB |
 
-**别调调色板**（实测 32/44/72 色一样大）；**别做帧间差分**（见 §7）。
+体积**主要**由画布和帧数决定，但**画面内容也影响**：把 3 张复杂截图换成徽章后，
+配置没变、帧数没变，体积从 2.15 掉到 1.97 MiB。
+
+**别调调色板**（实测 32/44/72 色体积一样）；**别做帧间差分**（见 §7）。
 **宽度只能选 960**：主页 `width="100%"`，GitHub 正文栏约 880px，640 会被拉伸变糊。
 
 发布：
@@ -219,5 +222,5 @@ curl -sL "https://github.com/GOODDAYDAY" | grep -oE 'src="[^"]*pixelwalk[^"]*"'
 **没做但值得做的：SMIL 动画 SVG。** 同一套世界模型换成 SVG：
 静态世界一个 `<g>`、镜头一个 `animateTransform`、小人一个 `animateTransform` + 4 帧 `<set>`、
 屏幕点亮用 `opacity`、天空用 `fill` 的 `<animate>`，屏幕素材 base64 内嵌。
-预计 **50–80 KB、任意缩放都清晰、GitHub camo 直接播**，比 2.15 MiB 的 GIF 强得多。
+预计 **50–80 KB、任意缩放都清晰、GitHub camo 直接播**，比 1.97 MiB 的 GIF 强得多。
 真要做的话这是下一步，也是"事件驱动更新"的前提（GIF 每天几 MB 扛不住，SVG 每次几 KB）。
