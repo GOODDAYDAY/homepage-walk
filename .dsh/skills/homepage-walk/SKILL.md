@@ -12,10 +12,11 @@ whenToUse: 用户提到 homepage-walk / 像素漫步 / 主页那张项目街的�
 
 | | |
 |---|---|
-| 项目目录 | `/Users/goodyhao/toy/homepage-walk/` |
+| 项目目录 | **这个仓库的根目录**（下称项目目录；本机是 `/Users/goodyhao/toy/homepage-walk/`） |
 | 主页仓库 | `GOODDAYDAY/GOODDAYDAY`，README 里 `images/pixelwalk/pixelwalk.gif` 那一段 |
 | 主页仓库本地克隆 | `/Users/goodyhao/toy/contriboom-out/profile-repo` |
-| 解释器 | `/Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3`（下称 `$PY`，它才有 Pillow） |
+| 解释器 | `/Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3`（下称 `$PY`） |
+| 依赖 | 只有 **Pillow + numpy**。**本机的 `/usr/bin/python3` 没装 Pillow**，所以一律用 `$PY`；换机器先 `pip install -r requirements.txt` |
 | 当前产物 | 960×342，14 站，180 帧 / 12fps / 15 秒，2.15 MiB |
 
 **设计原则：全程离线。** 不联网、不调 GitHub API、不装依赖，同样输入永远出同样结果。
@@ -127,8 +128,12 @@ nodes page phone play plug potion prompt pulse robot shield sparkle tictactoe to
 | `SCENE_BOTTOM` | 72 | 地平线：房子底、小人脚底都在这 |
 | `RAIL_Y` / `LINE1_Y` / `LINE2_Y` | 80 / 87 / 100 | 刻度轨 + HUD 两行 |
 | `SCREEN_W, SCREEN_H` | 40, 24 | 房子上那块屏幕（= 素材尺寸） |
-| `HOUSE_W` / `PITCH` / `MARGIN` | 48 / 60 / 110 | 房宽 / 站距 / 首尾留白。**站台变多就压这三个** |
+| `HOUSE_W` / `PITCH` / `MARGIN` | 48 / 60 / 110 | 房宽 / 站距 / 首尾留白 |
 | `SKY` | 8 组 | 8 个时刻的天空色阶 |
+
+**站台变多了要不要压 `PITCH`？** 实测：`HOUSE_W=48` / `PITCH=60` 在 **15 站**时世界宽 1060，
+房子不重叠，**不用压**。判据是 `PITCH > HOUSE_W` 即可（60 > 48 有余量）；
+压到 `HOUSE_W=40 / PITCH=52` 还能看，再小屏幕里的图就糊了。**先别压，撞了再压。**
 
 **文字渲染**：`text()` 用"真字体渲染 → 阈值化"去抗锯齿，得到像素字。字号有硬下限：
 
@@ -207,8 +212,8 @@ curl -sL "https://github.com/GOODDAYDAY" | grep -oE 'src="[^"]*pixelwalk[^"]*"'
 
 ## 8 版本历史与没做的事
 
-`git log` 第一条是**精简前的基线**：`4e86147` —— 32 站 / 280 帧 / 23 秒 / 3.73 MiB 的全量版本。
-想看或想回退：`git show 4e86147:projects.json`。精简砍掉的是：18 个站台、
+`git log` 第一条是**精简前的基线**：`a06a98e` —— 32 站 / 280 帧 / 23 秒的全量版本。
+想看或想回退：`git show a06a98e:projects.json`（**历史清过一次，旧的短哈希已失效**）。精简砍掉的是：18 个站台、
 `fetch_screens.py` 整条抓图管线、`work/` 目录、`fork` 分支（保留 `upstream`）。
 
 **没做但值得做的：SMIL 动画 SVG。** 同一套世界模型换成 SVG：

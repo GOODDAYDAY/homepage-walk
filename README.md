@@ -6,7 +6,8 @@
 
 产出一张 **960×342 的循环 GIF**，挂在 GitHub 主页 README 上。
 
-![封面](out/pixelwalk-poster.png)
+> 成品不进仓库（`.gitignore` 忽略 `out/`）：clone 下来跑一次就都有了。
+> 想先看图，主页 https://github.com/GOODDAYDAY 上挂着线上版本。
 
 **这个仓库是自包含的**：代码、配置、素材、产物、给 AI 用的 skills，全在里面。
 换台机器 clone 下来就能跑，不需要别的任何东西。
@@ -32,14 +33,27 @@ homepage-walk/
 
 ## 跑一遍
 
-```bash
-python3 -m pip install -r requirements.txt      # 只需要 Pillow
-# DSH 里自带的解释器也可以：
-# /Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+依赖只有两个：**Pillow + numpy**（`requirements.txt`）。
 
-python3 render.py                               # 出正片（15 秒）
-python3 render.py --preview 0.45                # 只拍一张静帧，调画面用这个，秒出
-python3 render.py --poster 0.52 --scale 4 --title   # 出封面
+```bash
+# 本机：直接用 DSH 自带的解释器（Pillow / numpy 都现成）
+PY=/Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
+$PY render.py
+
+# 别的机器：先装依赖，再用系统 python3
+pip install -r requirements.txt
+python3 render.py
+```
+
+> ⚠️ **本机的 `python3`（/usr/bin/python3）没有装 Pillow**，直接 `python3 render.py` 会
+> `ModuleNotFoundError`。要么用上面的 `$PY`，要么先 `pip install -r requirements.txt`。
+
+常用命令：
+
+```bash
+$PY render.py                                   # 出正片（15 秒）
+$PY render.py --preview 0.45                    # 只拍一张静帧，调画面用这个，秒出
+$PY render.py --poster 0.52 --scale 4 --title   # 出封面
 ```
 
 ### 跨平台

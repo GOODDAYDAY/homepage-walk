@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""像素漫步 · Pixel Walk —— 把参与过的项目做成一条可以走过去的街。
+"""homepage-walk —— 把参与过的项目做成一条可以走过去的街。
 
-世界在低分辨率（320x112）里绘制，最后统一放大 4 倍成 1280x448。
+世界在低分辨率（320x114）里绘制，最后统一最近邻放大（默认 3 倍成 960x342）。
 每站一间房：房高 = star 数，房色 = 主语言，亮着的窗户 = 那块屏幕。
 小人在画面里走，世界在脚下滚。
 """
@@ -916,7 +916,10 @@ def main() -> int:
             d.rectangle([0, bar, W - 1, bar], fill=(58, 130, 190))
             d.rectangle([0, bar + 1, W - 1, bar + 1], fill=(26, 32, 48))
             text(img, 6, 2, "PIXEL WALK", FONT_LATIN, 13, (248, 250, 255))
-            text(img, W - 6, 4, "2019 - 2026   /   14 PROJECTS",
+            # 标题按配置算，别写死 —— 加一站或改年份就会错
+            _ys = [int(s["year"]) for s in stations]
+            _span = f"{min(_ys)} - {max(_ys)}" if min(_ys) != max(_ys) else str(min(_ys))
+            text(img, W - 6, 4, f"{_span}   /   {len(stations)} PROJECTS",
                  FONT_LATIN, 10, (150, 200, 240), anchor="rt")
         img.resize((W * args.scale, H * args.scale), Image.NEAREST) \
            .save(out / "pixelwalk-poster.png")
