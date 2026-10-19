@@ -105,8 +105,20 @@ CJK_FONT = "/System/Library/Fonts/Hiragino Sans GB.ttc"
 ZH_PLACEHOLDER = "（用一句中文说明这个项目干了什么）"
 
 
+def _run_gh(args: list[str]) -> subprocess.CompletedProcess:
+    """调 gh，顺便把"没装 gh"变成一句人话。"""
+    try:
+        return subprocess.run(["gh", *args], capture_output=True, text=True)
+    except FileNotFoundError:
+        sys.exit(
+            "找不到 `gh` 命令。这个脚本靠 GitHub CLI 拉仓库列表。\n"
+            "  装：https://cli.github.com/    （macOS: brew install gh）\n"
+            "  登录：gh auth login\n"
+            "  只想手动写配置？这个脚本可以不用，projects.json 是纯文本，照 README 的字段手写即可。")
+
+
 def gh_json(args: list[str]) -> list[dict]:
-    out = subprocess.run(["gh", *args], capture_output=True, text=True)
+    out = _run_gh(args)
     if out.returncode != 0:
         sys.exit(f"gh 调用失败：{out.stderr.strip()}")
     return json.loads(out.stdout)
@@ -114,9 +126,7 @@ def gh_json(args: list[str]) -> list[dict]:
 
 def readme_images(owner: str, repo: str) -> list[str]:
     """看这个仓库的 README 里有没有能当屏幕用的图（只查不下载）。"""
-    r = subprocess.run(
-        ["gh", "api", f"repos/{owner}/{repo}/readme", "--jq", ".content"],
-        capture_output=True, text=True)
+    r = _run_gh(["api", f"repos/{owner}/{repo}/readme", "--jq", ".content"])
     if r.returncode != 0:
         return []
     try:
