@@ -99,6 +99,19 @@ skills 已经在 `.dsh/skills/` 里，**在这个仓库目录下开一个 sessio
 > 「重出一版，顺便出个新封面」
 > 「发到主页上」
 
+### 用的不是 DSH？
+
+skill 是 Anthropic 的 Agent Skills 格式（`<name>/SKILL.md` + `name`/`description` frontmatter），
+换个壳照样能用，只是要告诉它去哪找：
+
+| 工具 | 怎么让它找到 |
+|---|---|
+| **Claude Code** | `cp -r .dsh/skills/* .claude/skills/`（格式完全兼容） |
+| **Cursor / 其他读 `.agent` 目录的** | `cp -r .dsh/skills/* .agents/skills/` |
+| **直接丢给 ChatGPT / 网页版 AI** | 把 `.dsh/skills/homepage-walk/SKILL.md` 全文贴进对话，然后说需求 |
+
+**没有任何工具会自动"读这个项目"**——仓库不会自己说话，总得有个入口指给它。
+
 ### 情况 2：我在别的目录开 session
 
 把 skills 装到用户级目录，之后在任何地方都能用：
