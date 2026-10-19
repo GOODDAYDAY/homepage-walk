@@ -31,8 +31,48 @@ HOUSE_W = 48
 PITCH = 60
 MARGIN = 110
 
-FONT_LATIN = "/System/Library/Fonts/Menlo.ttc"
-FONT_CJK = "/System/Library/Fonts/Hiragino Sans GB.ttc"
+# 字体：按平台依次找第一个存在的，找不到才报错。
+# 写死 macOS 路径的话，Linux / Windows clone 下来第一步就崩，这台机器之外等于不能用。
+_FONT_CANDIDATES = {
+    "latin": [
+        "/System/Library/Fonts/Menlo.ttc",                                  # macOS
+        "/System/Library/Fonts/Monaco.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",              # Debian/Ubuntu
+        "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+        "/usr/share/fonts/liberation-mono/LiberationMono-Regular.ttf",
+        "/usr/share/fonts/TTF/DejaVuSansMono.ttf",                          # Arch
+        "C:/Windows/Fonts/consola.ttf",                                     # Windows
+    ],
+    "cjk": [
+        "/System/Library/Fonts/Hiragino Sans GB.ttc",                       # macOS
+        "/System/Library/Fonts/STHeiti Light.ttc",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",           # Linux
+        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        "/usr/share/fonts/truetype/arphic/uming.ttc",
+        "C:/Windows/Fonts/msyh.ttc",                                        # Windows 微软雅黑
+        "C:/Windows/Fonts/simhei.ttf",
+    ],
+}
+
+
+def _resolve_font(kind: str) -> str:
+    import pathlib
+    for p in _FONT_CANDIDATES[kind]:
+        if pathlib.Path(p).exists():
+            return p
+    return ""
+
+
+FONT_LATIN = _resolve_font("latin") or FONT_CANDIDATES["latin"][0]
+FONT_CJK = _resolve_font("cjk")
+if not FONT_CJK:
+    import sys as _sys
+    print("[homepage-walk] ⚠️  没找到中文字体，HUD 中文会显示成方块。\n"
+          "  装一个：apt install fonts-noto-cjk（Debian/Ubuntu）｜"
+          " brew install --cask font-noto-sans-cjk（macOS）\n"
+          "  然后重跑。或者把 render.py 里 FONT_CJK 直接改成你系统里的字体路径。",
+          file=_sys.stderr)
+    FONT_CJK = FONT_LATIN
 
 # ── 调色板 ──────────────────────────────────────────────────────────────────
 HAIR = (46, 36, 54)

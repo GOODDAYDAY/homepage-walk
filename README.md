@@ -33,13 +33,29 @@ homepage-walk/
 ## 跑一遍
 
 ```bash
-PY=/Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
-# 或者任何装了 Pillow 的 python3：python3 -m pip install pillow
+python3 -m pip install -r requirements.txt      # 只需要 Pillow
+# DSH 里自带的解释器也可以：
+# /Users/goodyhao/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/bin/python3
 
-$PY render.py                                   # 出正片（15 秒）
-$PY render.py --preview 0.45                    # 只拍一张静帧，调画面用这个，秒出
-$PY render.py --poster 0.52 --scale 4 --title   # 出封面
+python3 render.py                               # 出正片（15 秒）
+python3 render.py --preview 0.45                # 只拍一张静帧，调画面用这个，秒出
+python3 render.py --poster 0.52 --scale 4 --title   # 出封面
 ```
+
+### 跨平台
+
+字体是**按平台依次找第一个存在的**（macOS → Linux → Windows），不用改代码：
+
+| | macOS | Linux | Windows |
+|---|---|---|---|
+| 拉丁 | Menlo | DejaVu Sans Mono | Consolas |
+| 中文 | Hiragino Sans GB | Noto Sans CJK / 文泉驿 | 微软雅黑 |
+
+一个中文字体都找不到时会打一条警告，HUD 中文会变方块——按提示装一个即可
+（`apt install fonts-noto-cjk` / `brew install --cask font-noto-sans-cjk`）。
+
+> ⚠️ **换平台后像素级输出会变**：字形不同，中文字宽也不同（`fit()` 的 274 像素上限
+> 是按 Hiragino 12px 量的）。想一模一样的画面，还是得在原来那台机器上跑。
 
 **全程离线**，不联网、不调 API。同样的输入永远出同样的结果。
 
